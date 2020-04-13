@@ -2,7 +2,6 @@ package pl.memexurer.limbobimbo.listener;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -23,7 +22,8 @@ public class PlayerActionListener implements Listener {
 
     @EventHandler
     public void playerLeaveHandler(PlayerQuitEvent e) {
-        e.setQuitMessage(" ");
+        e.setQuitMessage("");
+        LimboBimboPlugin.getPluginInstance().getAuthenticationData().deauthenticate(e.getPlayer());
     }
 
     @EventHandler
@@ -38,7 +38,7 @@ public class PlayerActionListener implements Listener {
 
     @EventHandler
     public void damageReceiveHandler(EntityDamageEvent e) {
-        if(e.getEntity() instanceof Player) e.setCancelled(true);
+        e.setCancelled(true);
     }
 
     @EventHandler
@@ -48,12 +48,12 @@ public class PlayerActionListener implements Listener {
 
     @EventHandler
     public void commandHandler(PlayerCommandPreprocessEvent e) {
-        if(!e.getPlayer().isOp()) e.setCancelled(true);
+        if (!e.getPlayer().isOp()) e.setCancelled(true);
     }
 
     @EventHandler
     public void chatHandler(AsyncPlayerChatEvent e) {
-        if(!e.getPlayer().isOp()) {
+        if (!e.getPlayer().isOp()) {
             e.getPlayer().sendMessage(ChatColor.RED + "Nie mozna uzywac chatu w lobby!");
             e.setCancelled(true);
         } else {
@@ -68,10 +68,10 @@ public class PlayerActionListener implements Listener {
 
     @EventHandler
     public void interactHandler(PlayerInteractEvent e) {
-        if(e.getItem() == null) return;
+        if (e.getItem() == null) return;
 
-        if(e.getItem().isSimilar(LimboBimboPlugin.getPluginInstance().getConfiguration().QUEUE_JOIN_ITEM)) {
-            if(!LimboBimboPlugin.getPluginInstance().getAuthenticationData().isAuthenticated(e.getPlayer())) {
+        if (e.getItem().isSimilar(LimboBimboPlugin.getPluginInstance().getConfiguration().QUEUE_JOIN_ITEM)) {
+            if (!LimboBimboPlugin.getPluginInstance().getAuthenticationData().isAuthenticated(e.getPlayer())) {
                 e.getPlayer().sendMessage(ChatColor.AQUA + "Oczekiwanie na autoryzacje...");
                 return;
             }
@@ -79,6 +79,13 @@ public class PlayerActionListener implements Listener {
             LimboBimboPlugin.getPluginInstance().getQueueData().addPlayer(e.getPlayer());
             e.getPlayer().getInventory().clear();
             e.getPlayer().sendMessage(ChatColor.GREEN + "Zostales dodany do kolejki!");
+        }
+    }
+
+    @EventHandler
+    public void playerMoveHandler(PlayerMoveEvent e) {
+        if (e.getTo().getY() < LimboBimboPlugin.getPluginInstance().getConfiguration().SPAWN_TELEPORT_Y) {
+            e.getPlayer().teleport(e.getPlayer().getWorld().getSpawnLocation());
         }
     }
 }

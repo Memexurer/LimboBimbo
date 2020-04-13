@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.memexurer.limbobimbo.config.ConfigurationSource;
 import pl.memexurer.limbobimbo.config.CustomConfiguration;
-import pl.memexurer.limbobimbo.task.QueueTask;
 import pl.memexurer.limbobimbo.utils.ChatUtil;
 
 import java.util.HashMap;
@@ -40,6 +39,18 @@ public class PluginConfiguration extends CustomConfiguration {
 
     @ConfigurationSource(path = "server")
     public String SERVER_NAME;
+
+    @ConfigurationSource(path = "spawn.teleport")
+    public int SPAWN_TELEPORT_Y;
+
+    @ConfigurationSource(path = "scoreboard.title")
+    public String SCOREBOARD_TITLE;
+
+    @ConfigurationSource(path = "scoreboard.lines")
+    public List<String> SCOREBOARD_CONTENT;
+
+    @ConfigurationSource(path = "scoreboard.enabled")
+    public boolean SCOREBOARD_ENABLED;
 
     public ItemStack QUEUE_JOIN_ITEM;
 

@@ -28,3 +28,12 @@ item: # Item, za pomoca ktorego mozna dolaczyc do kolejki.
   name: "&6Kolejka"
   lore:
     - "&6Kliknij aby dolaczyc do kolejki."
+
+spawn:
+  teleport: -10 # Od jakiej kratki ma tepac na spawna?
+
+scoreboard:
+  enabled: false # Czy scoreboard ma byc wlaczony?
+  title: "&2&lLimbo&f&lBimbo" # Nazwa scoreboarda
+  lines: # Mozesz uzywac zmiennych z PlaceholderAPI.
+    - ""

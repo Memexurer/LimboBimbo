@@ -14,6 +14,7 @@ import pl.memexurer.limbobimbo.data.queue.LimboQueueData;
 import pl.memexurer.limbobimbo.listener.PacketDisablerAdapter;
 import pl.memexurer.limbobimbo.listener.PlayerActionListener;
 import pl.memexurer.limbobimbo.task.QueueTask;
+import pl.memexurer.limbobimbo.task.ScoreboardTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,9 +67,11 @@ public final class LimboBimboPlugin extends JavaPlugin implements PluginMessageL
         if (configuration.DISABLE_WORLD) packets.addAll(Arrays.asList(DISABLED_PACKETS));
         ProtocolLibrary.getProtocolManager().addPacketListener(new PacketDisablerAdapter(this, packets.toArray(new PacketType[]{})));
 
-
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "PremiumAuth", this);
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
+        if (configuration.SCOREBOARD_ENABLED)
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ScoreboardTask(), 20L, 20L);
     }
 
     @Override

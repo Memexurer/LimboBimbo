@@ -18,9 +18,4 @@ public class LimboQueueData {
     public PriorityQueue<LimboQueuePlayer> getQueue() {
         return queue;
     }
-
-    public void rejoin(LimboQueuePlayer player) {
-        queue.remove(player);
-        queue.add(player);
-    }
 }

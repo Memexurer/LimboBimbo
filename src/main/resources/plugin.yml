@@ -5,3 +5,5 @@ authors: [Memexurer]
 description: Plugin na limbo bimbo.
 depend:
   - ProtocolLib
+softdepend:
+  - PlaceholderAPI
