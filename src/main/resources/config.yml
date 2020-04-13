@@ -1,0 +1,30 @@
+## LimboBimbo - doyebany plugin na kolejki.
+queue:
+  messages: # Wiadomość wyświetlana na actionbarze w kolejce
+    awaiting:
+      - "&8>> &7Jesteś &b{POSITION} &7osobą w kolejce! &8<<"
+      - "&7Zakup wyższą rangę aby pominąć kolejkę."
+    sending:
+      - "&8>> &6Za chwilę zostaniesz wysłany na serwer. &8<<"
+    connecting:
+      - "&8>> &aProba laczenia z serwerem... &7({TIME}) &8<<"
+    connection_failed:
+      - "&8>> &cNie udalo sie polaczyc z serwerem docelowym! &8<<"
+  max_connection_time: 5 # Maksymalny czas polaczenia z serwerem.
+  priorities: # Priorytety, wedlug ktorych mozna miec mniejsze miejsce w kolejce.
+    limbo.vip: 1
+    limbo.svip: 2
+    limbo.admin: 3 # wedlug tego, admin ma najwyzsa pozycje
+
+disable_world: false # Ustaw na true, jezeli jestes biedny i nie mozesz zainwestowac w budowniczych.
+# Wylacza swiat, tworzy takie cos jak np. na DragonSurvival
+
+default_gamemode: CREATIVE # Podstawowy tryb gry
+
+server: "main" # Serwer, na ktory gracz zostaje wyslany po przejsciu kolejki.
+
+item: # Item, za pomoca ktorego mozna dolaczyc do kolejki.
+  type: STONE
+  name: "&6Kolejka"
+  lore:
+    - "&6Kliknij aby dolaczyc do kolejki."

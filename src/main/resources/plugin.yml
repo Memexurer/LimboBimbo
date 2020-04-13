@@ -1,0 +1,7 @@
+name: LimboBimbo
+version: ${project.version}
+main: pl.memexurer.limbobimbo.LimboBimboPlugin
+authors: [Memexurer]
+description: Plugin na limbo bimbo.
+depend:
+  - ProtocolLib
