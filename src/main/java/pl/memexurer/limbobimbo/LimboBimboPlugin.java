@@ -62,11 +62,9 @@ public final class LimboBimboPlugin extends JavaPlugin {
         ProtocolLibrary.getProtocolManager().addPacketListener(new PacketDisablerAdapter(this, packets.toArray(new PacketType[]{})));
 
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-
         if (configuration.SCOREBOARD_ENABLED)
             Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ScoreboardTask(configuration), 20L, 20L);
     }
-
 
     public LimboQueueData getQueueData() {
         return queueData;
