@@ -43,3 +43,5 @@ bungee:
   message: # Wiadomosc wysylana do gracza, jezeli bedzie probowal wbic obok bungee
     - "&4no debil no"
   ip: "" # IP Bungee
+# Jezeli ta funkcja ci nie dziala, oznacza to ze masz odpalone IP-Forwarding.
+# W pliku spigot.yml, musisz to wylaczyc.
