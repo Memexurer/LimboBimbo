@@ -52,6 +52,15 @@ public class PluginConfiguration extends CustomConfiguration {
     @ConfigurationSource(path = "scoreboard.enabled")
     public boolean SCOREBOARD_ENABLED;
 
+    @ConfigurationSource(path = "bungee.enabled")
+    public boolean BUNGEE_ENABLED;
+
+    @ConfigurationSource(path = "bungee.ip")
+    public String BUNGEE_IP;
+
+    @ConfigurationSource(path = "bungee.message")
+    public List<String> BUNGEE_MESSAGE;
+
     public ItemStack QUEUE_JOIN_ITEM;
 
     private final HashMap<String, Integer> QUEUE_PRIORITIES = new HashMap<>();

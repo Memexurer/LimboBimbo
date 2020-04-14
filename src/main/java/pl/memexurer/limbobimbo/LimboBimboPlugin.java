@@ -2,14 +2,9 @@ package pl.memexurer.limbobimbo;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.messaging.PluginMessageListener;
 import pl.memexurer.limbobimbo.config.impl.PluginConfiguration;
-import pl.memexurer.limbobimbo.data.AuthenticationData;
 import pl.memexurer.limbobimbo.data.queue.LimboQueueData;
 import pl.memexurer.limbobimbo.listener.PacketDisablerAdapter;
 import pl.memexurer.limbobimbo.listener.PlayerActionListener;
@@ -21,7 +16,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class LimboBimboPlugin extends JavaPlugin implements PluginMessageListener {
+public final class LimboBimboPlugin extends JavaPlugin {
     private static final PacketType[] DISABLED_PACKETS = new PacketType[]{
             PacketType.Play.Server.PLAYER_INFO,
             PacketType.Play.Server.MAP_CHUNK,
@@ -48,7 +43,6 @@ public final class LimboBimboPlugin extends JavaPlugin implements PluginMessageL
 
     private final PluginConfiguration configuration = new PluginConfiguration(this);
     private final LimboQueueData queueData = new LimboQueueData();
-    private final AuthenticationData authenticationData = new AuthenticationData();
 
     public static LimboBimboPlugin getPluginInstance() {
         return PLUGIN_INSTANCE;
@@ -60,40 +54,21 @@ public final class LimboBimboPlugin extends JavaPlugin implements PluginMessageL
 
         configuration.load();
 
-        Bukkit.getPluginManager().registerEvents(new PlayerActionListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerActionListener(configuration), this);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new QueueTask(configuration, queueData), 20L, 20L);
         List<PacketType> packets = new ArrayList<>(Collections.singletonList(PacketType.Play.Server.PLAYER_INFO));
 
         if (configuration.DISABLE_WORLD) packets.addAll(Arrays.asList(DISABLED_PACKETS));
         ProtocolLibrary.getProtocolManager().addPacketListener(new PacketDisablerAdapter(this, packets.toArray(new PacketType[]{})));
 
-        this.getServer().getMessenger().registerIncomingPluginChannel(this, "PremiumAuth", this);
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
         if (configuration.SCOREBOARD_ENABLED)
             Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ScoreboardTask(), 20L, 20L);
     }
 
-    @Override
-    public void onPluginMessageReceived(String channel, Player huj, byte[] message) {
-        ByteArrayDataInput in = ByteStreams.newDataInput(message);
-
-        if (channel.equals("PremiumAuth")) {
-            if (in.readUTF().equals("LoginResponse")) {
-                authenticationData.authenticatePlayer(in.readUTF());
-            }
-        }
-    }
 
     public LimboQueueData getQueueData() {
         return queueData;
-    }
-
-    public PluginConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public AuthenticationData getAuthenticationData() {
-        return authenticationData;
     }
 }

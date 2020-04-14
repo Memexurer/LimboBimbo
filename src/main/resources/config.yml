@@ -37,3 +37,9 @@ scoreboard:
   title: "&2&lLimbo&f&lBimbo" # Nazwa scoreboarda
   lines: # Mozesz uzywac zmiennych z PlaceholderAPI.
     - ""
+
+bungee:
+  enabled: false # Czy zabezpieczenie bungee ma byc wlaczone?
+  message: # Wiadomosc wysylana do gracza, jezeli bedzie probowal wbic obok bungee
+    - "&4no debil no"
+  ip: "" # IP Bungee
