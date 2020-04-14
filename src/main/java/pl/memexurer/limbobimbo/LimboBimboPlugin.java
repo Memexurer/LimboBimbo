@@ -64,11 +64,15 @@ public final class LimboBimboPlugin extends JavaPlugin {
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
         if (configuration.SCOREBOARD_ENABLED)
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ScoreboardTask(), 20L, 20L);
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new ScoreboardTask(configuration), 20L, 20L);
     }
 
 
     public LimboQueueData getQueueData() {
         return queueData;
+    }
+
+    public PluginConfiguration getConfiguration() {
+        return configuration;
     }
 }
