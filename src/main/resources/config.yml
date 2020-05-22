@@ -1,6 +1,10 @@
 ## LimboBimbo - doyebany plugin na kolejki.
 queue:
   messages: # Wiadomość wyświetlana na actionbarze w kolejce
+    position: BOSSBAR # Gdzie wiadomosci o kolejce maja byc wyswietlane?
+    # Dostepne opcje: BOSSBAR, ACTIONBAR (tylko jedna linia), TITLE (przy title, pierwsza linia to title a druga to subtitle)
+    # Opcja BOSSBAR nie jest wspierana na serwerach ponizej wersji 1.9
+
     awaiting:
       - "&8>> &7Jesteś &b{POSITION} &7osobą w kolejce! &8<<"
       - "&7Zakup wyższą rangę aby pominąć kolejkę."
@@ -24,6 +28,7 @@ default_gamemode: CREATIVE # Podstawowy tryb gry
 server: "main" # Serwer, na ktory gracz zostaje wyslany po przejsciu kolejki.
 
 item: # Item, za pomoca ktorego mozna dolaczyc do kolejki.
+  enabled: true # czy ma byc item wlaczony?
   type: STONE
   name: "&6Kolejka"
   lore:
@@ -45,3 +50,9 @@ bungee:
   ip: "" # IP Bungee
 # Jezeli ta funkcja ci nie dziala, oznacza to ze masz odpalone IP-Forwarding.
 # W pliku spigot.yml, musisz to wylaczyc.
+
+automsg:
+  enabled: true # Czy automessage ma byc wlaczone?
+  interval: 60 # czas w sekundach
+  messages: # Pamietaj ze wiadomosci musza byc w formatcie JSON.
+    - ""

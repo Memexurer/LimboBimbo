@@ -1,14 +1,10 @@
 package pl.memexurer.limbobimbo.utils;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.WrappedChatComponent;
+import net.minecraft.server.v1_8_R3.ChatBaseComponent;
+import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.ChatColor;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 
 public final class ChatUtil {
     public static String fixColor(String str) {
@@ -16,14 +12,7 @@ public final class ChatUtil {
     }
 
     public static void sendActionBar(Player player, String text) {
-        PacketContainer packetContainer = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.CHAT);
-        packetContainer.getChatComponents().write(0, WrappedChatComponent.fromText(ChatUtil.fixColor(text)));
-        packetContainer.getBytes().write(0, (byte) 2);
-
-        try {
-            ProtocolLibrary.getProtocolManager().sendServerPacket(player, packetContainer);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        PacketPlayOutChat chat = new PacketPlayOutChat(ChatBaseComponent.ChatSerializer.a("{\"text\":\"" + ChatUtil.fixColor(text) + "\"}"), (byte) 2);
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(chat);
     }
 }

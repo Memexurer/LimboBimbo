@@ -5,8 +5,6 @@ import org.bukkit.entity.Player;
 import pl.memexurer.limbobimbo.LimboBimboPlugin;
 import pl.memexurer.limbobimbo.utils.BungeeUtils;
 
-import java.nio.IntBuffer;
-import java.util.Comparator;
 import java.util.UUID;
 
 public class LimboQueuePlayer implements Comparable<LimboQueuePlayer> {

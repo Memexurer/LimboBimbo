@@ -78,18 +78,19 @@
         </dependency>
 
         <dependency>
-            <groupId>com.comphenix.protocol</groupId>
-            <artifactId>ProtocolLib</artifactId>
-            <version>4.5.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>me.clip</groupId>
             <artifactId>PlaceholderAPI</artifactId>
             <version>2.9.2</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/placeholderapi-2.9.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>pl.nms</groupId>
+            <artifactId>NMSApi</artifactId>
+            <version>2.9.2</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/Maso ochowe/Documents/Serwery/bep/coska.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
